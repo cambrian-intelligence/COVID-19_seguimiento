@@ -259,6 +259,14 @@ details.description:not([open]) summary::after { content: attr(data-close); }
 .footnotes { font-size: 12px !important; }
 .footnotes p { font-size: 12px !important; }
 
+.footer-heading { visibility: hidden; }
+
+.footer-col-1 { visibility: hidden; }
+
+.footer-col-3 { visibility: hidden; }
+
+.site-footer { padding: 0px; }
+
 .social.svg-icon { width: 21px !important; }
 
 .anchor-link { opacity: 0; padding-left: 0.375em; \-webkit-text-stroke: 1.75px white; \-webkit-transition: opacity 0.2s ease-in-out 0.1s; \-moz-transition: opacity 0.2s ease-in-out 0.1s; \-ms-transition: opacity 0.2s ease-in-out 0.1s; }
