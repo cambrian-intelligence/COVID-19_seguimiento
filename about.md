@@ -1,13 +1,11 @@
 ---
 layout: page
-title: About Me
+title: Sobre nosotros
 permalink: /about/
 ---
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
+Dashboard creado por [Cambrian Intelligence SL](https://cambrianintelligence.com).
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+Puedes consultar y descargar el código fuente de este Dashboard en [github](https://github.com/cambrian-intelligence/COVID-19_seguimiento).
 
-
-
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+Los datos que empleados por este Dashboard están recopilados en la siguiente hoja de cálculo: [https://docs.google.com/spreadsheets/d/1FwOXbkWeuS1LHrKxhSfepGtsgQ6iIEQZmWig_JKo8z0/edit#gid=0](https://docs.google.com/spreadsheets/d/1FwOXbkWeuS1LHrKxhSfepGtsgQ6iIEQZmWig_JKo8z0/edit#gid=0)
