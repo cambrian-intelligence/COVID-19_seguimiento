@@ -197,6 +197,8 @@ table td { border: 1px solid #e8e8e8; }
 
 .post img { display: block; vertical-align: top; margin-left: auto; margin-right: auto; }
 
+.post wrapper { display: block; vertical-align: top; }
+
 .post figcaption { text-align: center; font-size: .8rem; font-style: italic; color: light-grey; }
 
 .language-python + .language-plaintext { border-left: 1px solid grey; margin-left: 1rem !important; }
