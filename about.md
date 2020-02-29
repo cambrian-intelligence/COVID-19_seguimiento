@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Sobre nosotros
+title: Sobre esta herramienta
 permalink: /about/
 ---
 
