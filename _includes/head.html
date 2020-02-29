@@ -40,7 +40,7 @@
                 var node = document.createTextNode(el.getAttribute("title"));
                 caption.appendChild(node);
                 const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
+                wrapper.className = 'wrapper';
                 el.parentNode.insertBefore(wrapper, el);
                 el.parentNode.removeChild(el);
                 wrapper.appendChild(el);
