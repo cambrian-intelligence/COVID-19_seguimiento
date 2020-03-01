@@ -1,7 +1,7 @@
 ---
 keywords: fastai
 description: Tabla de datos de acumulado de infectados confirmados.
-title: Confirmados - datos
+title: Casos confirmados - datos
 toc: false 
 badges: false
 comments: false
