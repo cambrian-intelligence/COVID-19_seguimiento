@@ -1,7 +1,7 @@
 ---
 keywords: fastai
 description: Tabla de datos de acumulado de infectados confirmados.
-title: Casos confirmados - datos
+title: Casos confirmados - datos españa
 toc: false 
 badges: false
 comments: false
@@ -25,6 +25,13 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Última actualización 29/02/2020 - 23:39</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
