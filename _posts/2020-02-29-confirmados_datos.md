@@ -52,7 +52,6 @@ layout: notebook
 <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
 <span class="n">df</span>
 </pre></div>
 
@@ -94,14 +93,18 @@ layout: notebook
       <th>Cantabria</th>
       <th>Cataluña</th>
       <th>Castilla y León</th>
+      <th>Castilla-La Mancha</th>
       <th>Comunidad de Madrid</th>
       <th>Comunidad Valenciana</th>
-      <th>País Vasco</th>
+      <th>Extremadura</th>
       <th>Navarra</th>
+      <th>País Vasco</th>
       <th>Total confirmados</th>
     </tr>
     <tr>
       <th>Fecha</th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -133,6 +136,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2020-01-31</th>
@@ -141,6 +146,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -164,6 +171,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
     </tr>
     <tr>
@@ -173,6 +182,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -196,6 +207,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
     </tr>
     <tr>
@@ -205,6 +218,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -228,6 +243,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
     </tr>
     <tr>
@@ -237,6 +254,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -260,6 +279,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
     </tr>
     <tr>
@@ -269,6 +290,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -292,6 +315,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -301,6 +326,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -324,6 +351,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -333,6 +362,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -356,6 +387,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -365,6 +398,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -388,6 +423,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -397,6 +434,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -420,6 +459,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -429,6 +470,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -452,6 +495,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -461,6 +506,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -484,6 +531,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -493,6 +542,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -516,6 +567,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>2</td>
     </tr>
     <tr>
@@ -525,6 +578,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>2</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -548,6 +603,8 @@ layout: notebook
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>3</td>
     </tr>
     <tr>
@@ -557,6 +614,8 @@ layout: notebook
       <td>0</td>
       <td>1</td>
       <td>2</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -576,8 +635,10 @@ layout: notebook
       <td>0</td>
       <td>3</td>
       <td>0</td>
+      <td>0</td>
       <td>4</td>
       <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>17</td>
@@ -592,8 +653,10 @@ layout: notebook
       <td>0</td>
       <td>3</td>
       <td>2</td>
+      <td>0</td>
       <td>5</td>
       <td>9</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>33</td>
@@ -602,17 +665,37 @@ layout: notebook
       <th>2020-02-29</th>
       <td>1</td>
       <td>10</td>
-      <td>1</td>
+      <td>0</td>
       <td>2</td>
       <td>7</td>
       <td>1</td>
       <td>6</td>
       <td>2</td>
+      <td>0</td>
       <td>10</td>
       <td>15</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <th>2020-03-01</th>
+      <td>1</td>
+      <td>12</td>
+      <td>0</td>
+      <td>2</td>
+      <td>7</td>
+      <td>1</td>
+      <td>12</td>
       <td>3</td>
       <td>1</td>
-      <td>59</td>
+      <td>15</td>
+      <td>15</td>
+      <td>4</td>
+      <td>1</td>
+      <td>9</td>
+      <td>83</td>
     </tr>
   </tbody>
 </table>
