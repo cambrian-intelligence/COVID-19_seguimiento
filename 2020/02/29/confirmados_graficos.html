@@ -622,311 +622,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="5-primeros-d&#237;as">5 primeros d&#237;as<a class="anchor-link" href="#5-primeros-d&#237;as">&#182;</a></h3>
-</div>
-</div>
-</div>
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<details class="description">
-      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
-        <p><div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
-<span class="c1"># get data</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://docs.google.com/spreadsheet/ccc?key=1Z7VQ5xlf3BaTx_LBBblsW4hLoGYWnZyog3jqsS9Dbgc&amp;output=csv&amp;gid=0&#39;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;Wrong status code&#39;</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:]][</span><span class="mi">1</span><span class="p">:</span><span class="mi">65</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">col_names</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">col_names</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Fecha&#39;</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">col_names</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
-<span class="n">keep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Spain&#39;</span><span class="p">,</span> <span class="s1">&#39;Italy&#39;</span><span class="p">,</span> <span class="s1">&#39;South Korea&#39;</span><span class="p">,</span> <span class="s1">&#39;Iran&#39;</span><span class="p">,</span> <span class="s1">&#39;Japan&#39;</span><span class="p">,</span> <span class="s1">&#39;France&#39;</span><span class="p">,</span> <span class="s1">&#39;Singapore&#39;</span><span class="p">,</span> <span class="s1">&#39;Germany&#39;</span><span class="p">]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span>
-
-<span class="c1"># align data</span>
-<span class="n">aligned_data</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">plus_days</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Spain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Spain&#39;</span><span class="p">][</span><span class="mi">42</span><span class="p">:</span><span class="mi">42</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Italy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Italy&#39;</span><span class="p">][</span><span class="mi">37</span><span class="p">:</span><span class="mi">37</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">][</span><span class="mi">16</span><span class="p">:</span><span class="mi">16</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Iran&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Iran&#39;</span><span class="p">][</span><span class="mi">37</span><span class="p">:</span><span class="mi">37</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Japan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Japan&#39;</span><span class="p">][</span><span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;France&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;France&#39;</span><span class="p">][</span><span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Singapore&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Singapore&#39;</span><span class="p">][</span><span class="mi">12</span><span class="p">:</span><span class="mi">12</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Germany&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Germany&#39;</span><span class="p">][</span><span class="mi">16</span><span class="p">:</span><span class="mi">16</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-
-<span class="n">df_aligned</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">aligned_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">]))</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df_aligned</span>
-<span class="n">df</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-</p>
-    </details>
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Spain</th>
-      <th>Italy</th>
-      <th>South Korea</th>
-      <th>Iran</th>
-      <th>Japan</th>
-      <th>France</th>
-      <th>Singapore</th>
-      <th>Germany</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>4.0</td>
-      <td>2.0</td>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>7.0</td>
-      <td>3.0</td>
-      <td>6.0</td>
-      <td>5.0</td>
-      <td>7.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>5.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>13.0</td>
-      <td>20.0</td>
-      <td>11.0</td>
-      <td>18.0</td>
-      <td>11.0</td>
-      <td>5.0</td>
-      <td>5.0</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>27.0</td>
-      <td>79.0</td>
-      <td>12.0</td>
-      <td>28.0</td>
-      <td>14.0</td>
-      <td>6.0</td>
-      <td>7.0</td>
-      <td>8.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>42.0</td>
-      <td>152.0</td>
-      <td>15.0</td>
-      <td>43.0</td>
-      <td>17.0</td>
-      <td>6.0</td>
-      <td>10.0</td>
-      <td>10.0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<details class="description">
-      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
-        <p><div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
-<span class="c1"># plot</span>
-<span class="c1"># color scheme</span>
-<span class="k">def</span> <span class="nf">my_theme</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;scheme&#39;</span><span class="p">:</span> <span class="s1">&#39;category10&#39;</span><span class="p">}}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-<span class="c1"># Register and enable.</span>
-<span class="n">alt</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;my_theme&#39;</span><span class="p">,</span> <span class="n">my_theme</span><span class="p">)</span>
-<span class="n">alt</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">enable</span><span class="p">(</span><span class="s1">&#39;my_theme&#39;</span><span class="p">)</span>
-
-<span class="n">source</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Confirmados&#39;</span><span class="p">)</span>
-<span class="n">source</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-<span class="n">source</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">selection</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_multi</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">],</span> <span class="n">bind</span><span class="o">=</span><span class="s1">&#39;legend&#39;</span><span class="p">)</span>
-
-<span class="n">line</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">interpolate</span><span class="o">=</span><span class="s1">&#39;basis&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;index:Q&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">tickRound</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Número de días&#39;</span><span class="p">),</span>
-    <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;Confirmados:Q&#39;</span><span class="p">),</span>
-    <span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;category:N&#39;</span><span class="p">),</span>
-    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="n">nearest</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;single&#39;</span><span class="p">,</span> <span class="n">nearest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span>
-                        <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">],</span> <span class="n">empty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
-
-<span class="c1"># Transparent selectors across the chart. This is what tells us</span>
-<span class="c1"># the x-value of the cursor</span>
-<span class="n">selectors</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;index:Q&#39;</span><span class="p">,</span>
-    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
-<span class="p">)</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span>
-    <span class="n">nearest</span>
-<span class="p">)</span>
-
-<span class="c1"># Draw points on the line, and highlight based on selection</span>
-<span class="n">points</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="c1"># Draw text labels near the points, and highlight based on selection</span>
-<span class="n">text</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">mark_text</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">dy</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">text</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="s1">&#39;Confirmados:Q&#39;</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span>
-    <span class="n">selection</span>
-<span class="p">)</span>
-
-<span class="c1"># Draw a rule at the location of the selection</span>
-<span class="n">rules</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_rule</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;index:Q&#39;</span><span class="p">,</span>
-<span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span>
-    <span class="n">nearest</span>
-<span class="p">)</span>
-
-<span class="c1"># Put the five layers into a chart and bind the data</span>
-<span class="n">alt</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span>
-    <span class="n">line</span><span class="p">,</span> <span class="n">selectors</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">text</span>
-<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
-    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
-<span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-</p>
-    </details>
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-<div id="altair-viz-7ceec0de71b746dcaf2ff80d39555aa0"></div>
-<script type="text/javascript">
-  (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-7ceec0de71b746dcaf2ff80d39555aa0");
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.0.2?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
-    };
-
-    function loadScript(lib) {
-      return new Promise(function(resolve, reject) {
-        var s = document.createElement('script');
-        s.src = paths[lib];
-        s.async = true;
-        s.onload = () => resolve(paths[lib]);
-        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-        document.getElementsByTagName("head")[0].appendChild(s);
-      });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else if (typeof vegaEmbed === "function") {
-      displayChart(vegaEmbed);
-    } else {
-      loadScript("vega")
-        .then(() => loadScript("vega-lite"))
-        .then(() => loadScript("vega-embed"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"range": {"category": {"scheme": "category10"}}}, "layer": [{"mark": {"type": "line", "interpolate": "basis"}, "encoding": {"color": {"type": "nominal", "field": "category"}, "opacity": {"condition": {"value": 1, "selection": "selector060"}, "value": 0.2}, "x": {"type": "quantitative", "axis": {"tickRound": true}, "field": "index", "title": "N\u00famero de d\u00edas"}, "y": {"type": "quantitative", "field": "Confirmados"}}, "selection": {"selector060": {"type": "multi", "fields": ["category"], "bind": "legend"}}}, {"mark": "point", "encoding": {"opacity": {"value": 0}, "x": {"type": "quantitative", "field": "index"}}, "selection": {"selector061": {"type": "single", "nearest": true, "on": "mouseover", "fields": ["index"], "empty": "none"}}}, {"mark": "point", "encoding": {"color": {"type": "nominal", "field": "category"}, "opacity": {"condition": {"value": 1, "selection": "selector061"}, "value": 0}, "x": {"type": "quantitative", "axis": {"tickRound": true}, "field": "index", "title": "N\u00famero de d\u00edas"}, "y": {"type": "quantitative", "field": "Confirmados"}}}, {"mark": {"type": "rule", "color": "gray"}, "encoding": {"x": {"type": "quantitative", "field": "index"}}, "transform": [{"filter": {"selection": "selector061"}}]}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": -5}, "encoding": {"color": {"type": "nominal", "field": "category"}, "opacity": {"condition": {"value": 1, "selection": "selector060"}, "value": 0.2}, "text": {"condition": {"type": "quantitative", "field": "Confirmados", "selection": "selector061"}, "value": " "}, "x": {"type": "quantitative", "axis": {"tickRound": true}, "field": "index", "title": "N\u00famero de d\u00edas"}, "y": {"type": "quantitative", "field": "Confirmados"}}}], "data": {"name": "data-05fd67affc80315aa74e3c3592d1235c"}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json", "datasets": {"data-05fd67affc80315aa74e3c3592d1235c": [{"index": 0, "category": "Spain", "Confirmados": 3.0}, {"index": 1, "category": "Spain", "Confirmados": 7.0}, {"index": 2, "category": "Spain", "Confirmados": 13.0}, {"index": 3, "category": "Spain", "Confirmados": 27.0}, {"index": 4, "category": "Spain", "Confirmados": 42.0}, {"index": 0, "category": "Italy", "Confirmados": 3.0}, {"index": 1, "category": "Italy", "Confirmados": 3.0}, {"index": 2, "category": "Italy", "Confirmados": 20.0}, {"index": 3, "category": "Italy", "Confirmados": 79.0}, {"index": 4, "category": "Italy", "Confirmados": 152.0}, {"index": 0, "category": "South Korea", "Confirmados": 4.0}, {"index": 1, "category": "South Korea", "Confirmados": 6.0}, {"index": 2, "category": "South Korea", "Confirmados": 11.0}, {"index": 3, "category": "South Korea", "Confirmados": 12.0}, {"index": 4, "category": "South Korea", "Confirmados": 15.0}, {"index": 0, "category": "Iran", "Confirmados": 2.0}, {"index": 1, "category": "Iran", "Confirmados": 5.0}, {"index": 2, "category": "Iran", "Confirmados": 18.0}, {"index": 3, "category": "Iran", "Confirmados": 28.0}, {"index": 4, "category": "Iran", "Confirmados": 43.0}, {"index": 0, "category": "Japan", "Confirmados": 3.0}, {"index": 1, "category": "Japan", "Confirmados": 7.0}, {"index": 2, "category": "Japan", "Confirmados": 11.0}, {"index": 3, "category": "Japan", "Confirmados": 14.0}, {"index": 4, "category": "Japan", "Confirmados": 17.0}, {"index": 0, "category": "France", "Confirmados": 3.0}, {"index": 1, "category": "France", "Confirmados": 4.0}, {"index": 2, "category": "France", "Confirmados": 5.0}, {"index": 3, "category": "France", "Confirmados": 6.0}, {"index": 4, "category": "France", "Confirmados": 6.0}, {"index": 0, "category": "Singapore", "Confirmados": 4.0}, {"index": 1, "category": "Singapore", "Confirmados": 4.0}, {"index": 2, "category": "Singapore", "Confirmados": 5.0}, {"index": 3, "category": "Singapore", "Confirmados": 7.0}, {"index": 4, "category": "Singapore", "Confirmados": 10.0}, {"index": 0, "category": "Germany", "Confirmados": 4.0}, {"index": 1, "category": "Germany", "Confirmados": 5.0}, {"index": 2, "category": "Germany", "Confirmados": 7.0}, {"index": 3, "category": "Germany", "Confirmados": 8.0}, {"index": 4, "category": "Germany", "Confirmados": 10.0}]}}, {"mode": "vega-lite"});
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="10-primeros-d&#237;as">10 primeros d&#237;as<a class="anchor-link" href="#10-primeros-d&#237;as">&#182;</a></h3>
+<h3 id="20-primeros-d&#237;as">20 primeros d&#237;as<a class="anchor-link" href="#20-primeros-d&#237;as">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -960,17 +656,20 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <span class="c1"># align data</span>
 <span class="n">aligned_data</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">daily_delta</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">plus_days</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">plus_days</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">plus_spain</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">daily_delta</span>
+<span class="n">plus_iran</span> <span class="o">=</span> <span class="mi">11</span> <span class="o">+</span> <span class="n">daily_delta</span>
+<span class="n">plus_italy</span> <span class="o">=</span> <span class="mi">11</span> <span class="o">+</span> <span class="n">daily_delta</span>
+<span class="n">plus_s_korea</span> <span class="o">=</span> <span class="mi">20</span>
+
 <span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Spain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Spain&#39;</span><span class="p">][</span><span class="mi">42</span><span class="p">:</span><span class="mi">42</span><span class="o">+</span><span class="n">plus_spain</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Italy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Italy&#39;</span><span class="p">][</span><span class="mi">37</span><span class="p">:</span><span class="mi">37</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">][</span><span class="mi">16</span><span class="p">:</span><span class="mi">16</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Iran&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Iran&#39;</span><span class="p">][</span><span class="mi">37</span><span class="p">:</span><span class="mi">37</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
+<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Italy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Italy&#39;</span><span class="p">][</span><span class="mi">37</span><span class="p">:</span><span class="mi">37</span><span class="o">+</span><span class="n">plus_italy</span><span class="p">])</span>
+<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">][</span><span class="mi">16</span><span class="p">:</span><span class="mi">16</span><span class="o">+</span><span class="n">plus_s_korea</span><span class="p">])</span>
+<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Iran&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Iran&#39;</span><span class="p">][</span><span class="mi">37</span><span class="p">:</span><span class="mi">37</span><span class="o">+</span><span class="n">plus_iran</span><span class="p">])</span>
 <span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Japan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Japan&#39;</span><span class="p">][</span><span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
 <span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;France&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;France&#39;</span><span class="p">][</span><span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
 <span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Singapore&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Singapore&#39;</span><span class="p">][</span><span class="mi">12</span><span class="p">:</span><span class="mi">12</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
 <span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Germany&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Germany&#39;</span><span class="p">][</span><span class="mi">16</span><span class="p">:</span><span class="mi">16</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-
 <span class="n">df_aligned</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">aligned_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">]))</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df_aligned</span>
 <span class="n">df</span>
@@ -1127,6 +826,116 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
       <td>18.0</td>
       <td>14.0</td>
     </tr>
+    <tr>
+      <th>10</th>
+      <td>NaN</td>
+      <td>1156.0</td>
+      <td>24.0</td>
+      <td>593.0</td>
+      <td>25.0</td>
+      <td>6.0</td>
+      <td>24.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>NaN</td>
+      <td>1690.0</td>
+      <td>27.0</td>
+      <td>978.0</td>
+      <td>25.0</td>
+      <td>6.0</td>
+      <td>28.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>27.0</td>
+      <td>NaN</td>
+      <td>25.0</td>
+      <td>11.0</td>
+      <td>30.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>NaN</td>
+      <td>26.0</td>
+      <td>11.0</td>
+      <td>33.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>NaN</td>
+      <td>26.0</td>
+      <td>11.0</td>
+      <td>40.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>11.0</td>
+      <td>43.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>11.0</td>
+      <td>45.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>28.0</td>
+      <td>NaN</td>
+      <td>33.0</td>
+      <td>11.0</td>
+      <td>47.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>29.0</td>
+      <td>NaN</td>
+      <td>41.0</td>
+      <td>11.0</td>
+      <td>50.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>30.0</td>
+      <td>NaN</td>
+      <td>53.0</td>
+      <td>12.0</td>
+      <td>58.0</td>
+      <td>16.0</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -1150,195 +959,6 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
-<span class="c1"># plot</span>
-
-<span class="c1"># color scheme</span>
-<span class="k">def</span> <span class="nf">my_theme</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;scheme&#39;</span><span class="p">:</span> <span class="s1">&#39;category10&#39;</span><span class="p">}}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-<span class="c1"># Register and enable.</span>
-<span class="n">alt</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;my_theme&#39;</span><span class="p">,</span> <span class="n">my_theme</span><span class="p">)</span>
-<span class="n">alt</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">enable</span><span class="p">(</span><span class="s1">&#39;my_theme&#39;</span><span class="p">)</span>
-
-<span class="n">source</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">&#39;Confirmados&#39;</span><span class="p">)</span>
-<span class="n">source</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-<span class="n">source</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">selection</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_multi</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">],</span> <span class="n">bind</span><span class="o">=</span><span class="s1">&#39;legend&#39;</span><span class="p">)</span>
-
-<span class="n">line</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">interpolate</span><span class="o">=</span><span class="s1">&#39;basis&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;index:Q&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="n">tickRound</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Número de días&#39;</span><span class="p">),</span>
-    <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;Confirmados:Q&#39;</span><span class="p">),</span>
-    <span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;category:N&#39;</span><span class="p">),</span>
-    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mf">0.2</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="n">nearest</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;single&#39;</span><span class="p">,</span> <span class="n">nearest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span>
-                        <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">],</span> <span class="n">empty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
-
-<span class="c1"># Transparent selectors across the chart. This is what tells us</span>
-<span class="c1"># the x-value of the cursor</span>
-<span class="n">selectors</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;index:Q&#39;</span><span class="p">,</span>
-    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
-<span class="p">)</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span>
-    <span class="n">nearest</span>
-<span class="p">)</span>
-
-<span class="c1"># Draw points on the line, and highlight based on selection</span>
-<span class="n">points</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="c1"># Draw text labels near the points, and highlight based on selection</span>
-<span class="n">text</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">mark_text</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">dy</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">text</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="s1">&#39;Confirmados:Q&#39;</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
-<span class="p">)</span>
-
-<span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span>
-    <span class="n">selection</span>
-<span class="p">)</span>
-
-<span class="c1"># Draw a rule at the location of the selection</span>
-<span class="n">rules</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_rule</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;index:Q&#39;</span><span class="p">,</span>
-<span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span>
-    <span class="n">nearest</span>
-<span class="p">)</span>
-
-<span class="c1"># Put the five layers into a chart and bind the data</span>
-<span class="n">alt</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span>
-    <span class="n">line</span><span class="p">,</span> <span class="n">selectors</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">text</span>
-<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
-    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
-<span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-</p>
-    </details>
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-
-<div id="altair-viz-6fb213f67982429a8041b3224adfb667"></div>
-<script type="text/javascript">
-  (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-6fb213f67982429a8041b3224adfb667");
-    const paths = {
-      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
-      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
-      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.0.2?noext",
-      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
-    };
-
-    function loadScript(lib) {
-      return new Promise(function(resolve, reject) {
-        var s = document.createElement('script');
-        s.src = paths[lib];
-        s.async = true;
-        s.onload = () => resolve(paths[lib]);
-        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
-        document.getElementsByTagName("head")[0].appendChild(s);
-      });
-    }
-
-    function showError(err) {
-      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
-      throw err;
-    }
-
-    function displayChart(vegaEmbed) {
-      vegaEmbed(outputDiv, spec, embedOpt)
-        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
-    }
-
-    if(typeof define === "function" && define.amd) {
-      requirejs.config({paths});
-      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
-    } else if (typeof vegaEmbed === "function") {
-      displayChart(vegaEmbed);
-    } else {
-      loadScript("vega")
-        .then(() => loadScript("vega-lite"))
-        .then(() => loadScript("vega-embed"))
-        .catch(showError)
-        .then(() => displayChart(vegaEmbed));
-    }
-  })({"config": {"range": {"category": {"scheme": "category10"}}}, "layer": [{"mark": {"type": "line", "interpolate": "basis"}, "encoding": {"color": {"type": "nominal", "field": "category"}, "opacity": {"condition": {"value": 1, "selection": "selector062"}, "value": 0.2}, "x": {"type": "quantitative", "axis": {"tickRound": true}, "field": "index", "title": "N\u00famero de d\u00edas"}, "y": {"type": "quantitative", "field": "Confirmados"}}, "selection": {"selector062": {"type": "multi", "fields": ["category"], "bind": "legend"}}}, {"mark": "point", "encoding": {"opacity": {"value": 0}, "x": {"type": "quantitative", "field": "index"}}, "selection": {"selector063": {"type": "single", "nearest": true, "on": "mouseover", "fields": ["index"], "empty": "none"}}}, {"mark": "point", "encoding": {"color": {"type": "nominal", "field": "category"}, "opacity": {"condition": {"value": 1, "selection": "selector063"}, "value": 0}, "x": {"type": "quantitative", "axis": {"tickRound": true}, "field": "index", "title": "N\u00famero de d\u00edas"}, "y": {"type": "quantitative", "field": "Confirmados"}}}, {"mark": {"type": "rule", "color": "gray"}, "encoding": {"x": {"type": "quantitative", "field": "index"}}, "transform": [{"filter": {"selection": "selector063"}}]}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": -5}, "encoding": {"color": {"type": "nominal", "field": "category"}, "opacity": {"condition": {"value": 1, "selection": "selector062"}, "value": 0.2}, "text": {"condition": {"type": "quantitative", "field": "Confirmados", "selection": "selector063"}, "value": " "}, "x": {"type": "quantitative", "axis": {"tickRound": true}, "field": "index", "title": "N\u00famero de d\u00edas"}, "y": {"type": "quantitative", "field": "Confirmados"}}}], "data": {"name": "data-d8b5e5d280d7f7a016c2cde8121dba7e"}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json", "datasets": {"data-d8b5e5d280d7f7a016c2cde8121dba7e": [{"index": 0, "category": "Spain", "Confirmados": 3.0}, {"index": 1, "category": "Spain", "Confirmados": 7.0}, {"index": 2, "category": "Spain", "Confirmados": 13.0}, {"index": 3, "category": "Spain", "Confirmados": 27.0}, {"index": 4, "category": "Spain", "Confirmados": 42.0}, {"index": 5, "category": "Spain", "Confirmados": 65.0}, {"index": 6, "category": "Spain", "Confirmados": 84.0}, {"index": 7, "category": "Spain", "Confirmados": null}, {"index": 8, "category": "Spain", "Confirmados": null}, {"index": 9, "category": "Spain", "Confirmados": null}, {"index": 0, "category": "Italy", "Confirmados": 3.0}, {"index": 1, "category": "Italy", "Confirmados": 3.0}, {"index": 2, "category": "Italy", "Confirmados": 20.0}, {"index": 3, "category": "Italy", "Confirmados": 79.0}, {"index": 4, "category": "Italy", "Confirmados": 152.0}, {"index": 5, "category": "Italy", "Confirmados": 228.0}, {"index": 6, "category": "Italy", "Confirmados": 323.0}, {"index": 7, "category": "Italy", "Confirmados": 466.0}, {"index": 8, "category": "Italy", "Confirmados": 653.0}, {"index": 9, "category": "Italy", "Confirmados": 897.0}, {"index": 0, "category": "South Korea", "Confirmados": 4.0}, {"index": 1, "category": "South Korea", "Confirmados": 6.0}, {"index": 2, "category": "South Korea", "Confirmados": 11.0}, {"index": 3, "category": "South Korea", "Confirmados": 12.0}, {"index": 4, "category": "South Korea", "Confirmados": 15.0}, {"index": 5, "category": "South Korea", "Confirmados": 15.0}, {"index": 6, "category": "South Korea", "Confirmados": 16.0}, {"index": 7, "category": "South Korea", "Confirmados": 23.0}, {"index": 8, "category": "South Korea", "Confirmados": 23.0}, {"index": 9, "category": "South Korea", "Confirmados": 24.0}, {"index": 0, "category": "Iran", "Confirmados": 2.0}, {"index": 1, "category": "Iran", "Confirmados": 5.0}, {"index": 2, "category": "Iran", "Confirmados": 18.0}, {"index": 3, "category": "Iran", "Confirmados": 28.0}, {"index": 4, "category": "Iran", "Confirmados": 43.0}, {"index": 5, "category": "Iran", "Confirmados": 61.0}, {"index": 6, "category": "Iran", "Confirmados": 95.0}, {"index": 7, "category": "Iran", "Confirmados": 139.0}, {"index": 8, "category": "Iran", "Confirmados": 245.0}, {"index": 9, "category": "Iran", "Confirmados": 388.0}, {"index": 0, "category": "Japan", "Confirmados": 3.0}, {"index": 1, "category": "Japan", "Confirmados": 7.0}, {"index": 2, "category": "Japan", "Confirmados": 11.0}, {"index": 3, "category": "Japan", "Confirmados": 14.0}, {"index": 4, "category": "Japan", "Confirmados": 17.0}, {"index": 5, "category": "Japan", "Confirmados": 20.0}, {"index": 6, "category": "Japan", "Confirmados": 20.0}, {"index": 7, "category": "Japan", "Confirmados": 20.0}, {"index": 8, "category": "Japan", "Confirmados": 23.0}, {"index": 9, "category": "Japan", "Confirmados": 25.0}, {"index": 0, "category": "France", "Confirmados": 3.0}, {"index": 1, "category": "France", "Confirmados": 4.0}, {"index": 2, "category": "France", "Confirmados": 5.0}, {"index": 3, "category": "France", "Confirmados": 6.0}, {"index": 4, "category": "France", "Confirmados": 6.0}, {"index": 5, "category": "France", "Confirmados": 6.0}, {"index": 6, "category": "France", "Confirmados": 6.0}, {"index": 7, "category": "France", "Confirmados": 6.0}, {"index": 8, "category": "France", "Confirmados": 6.0}, {"index": 9, "category": "France", "Confirmados": 6.0}, {"index": 0, "category": "Singapore", "Confirmados": 4.0}, {"index": 1, "category": "Singapore", "Confirmados": 4.0}, {"index": 2, "category": "Singapore", "Confirmados": 5.0}, {"index": 3, "category": "Singapore", "Confirmados": 7.0}, {"index": 4, "category": "Singapore", "Confirmados": 10.0}, {"index": 5, "category": "Singapore", "Confirmados": 13.0}, {"index": 6, "category": "Singapore", "Confirmados": 16.0}, {"index": 7, "category": "Singapore", "Confirmados": 18.0}, {"index": 8, "category": "Singapore", "Confirmados": 18.0}, {"index": 9, "category": "Singapore", "Confirmados": 18.0}, {"index": 0, "category": "Germany", "Confirmados": 4.0}, {"index": 1, "category": "Germany", "Confirmados": 5.0}, {"index": 2, "category": "Germany", "Confirmados": 7.0}, {"index": 3, "category": "Germany", "Confirmados": 8.0}, {"index": 4, "category": "Germany", "Confirmados": 10.0}, {"index": 5, "category": "Germany", "Confirmados": 12.0}, {"index": 6, "category": "Germany", "Confirmados": 12.0}, {"index": 7, "category": "Germany", "Confirmados": 12.0}, {"index": 8, "category": "Germany", "Confirmados": 13.0}, {"index": 9, "category": "Germany", "Confirmados": 14.0}]}}, {"mode": "vega-lite"});
-</script>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="20-primeros-d&#237;as">20 primeros d&#237;as<a class="anchor-link" href="#20-primeros-d&#237;as">&#182;</a></h3>
-</div>
-</div>
-</div>
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<details class="description">
-      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
-        <p><div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
-<span class="c1"># get data</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://docs.google.com/spreadsheet/ccc?key=1Z7VQ5xlf3BaTx_LBBblsW4hLoGYWnZyog3jqsS9Dbgc&amp;output=csv&amp;gid=0&#39;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;Wrong status code&#39;</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:]][</span><span class="mi">1</span><span class="p">:</span><span class="mi">65</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">col_names</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">col_names</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Fecha&#39;</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">col_names</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Fecha&#39;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
-<span class="n">keep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Spain&#39;</span><span class="p">,</span> <span class="s1">&#39;Italy&#39;</span><span class="p">,</span> <span class="s1">&#39;South Korea&#39;</span><span class="p">,</span> <span class="s1">&#39;Iran&#39;</span><span class="p">,</span> <span class="s1">&#39;Japan&#39;</span><span class="p">,</span> <span class="s1">&#39;France&#39;</span><span class="p">,</span> <span class="s1">&#39;Singapore&#39;</span><span class="p">,</span> <span class="s1">&#39;Germany&#39;</span><span class="p">]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">keep</span><span class="p">]</span>
-
-<span class="c1"># align data</span>
-<span class="n">aligned_data</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">daily_delta</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">plus_days</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">plus_spain</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">daily_delta</span>
-<span class="n">plus_iran</span> <span class="o">=</span> <span class="mi">11</span> <span class="o">+</span> <span class="n">daily_delta</span>
-<span class="n">plus_italy</span> <span class="o">=</span> <span class="mi">11</span> <span class="o">+</span> <span class="n">daily_delta</span>
-<span class="n">plus_s_korea</span> <span class="o">=</span> <span class="mi">20</span>
-
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Spain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Spain&#39;</span><span class="p">][</span><span class="mi">42</span><span class="p">:</span><span class="mi">42</span><span class="o">+</span><span class="n">plus_spain</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Italy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Italy&#39;</span><span class="p">][</span><span class="mi">37</span><span class="p">:</span><span class="mi">37</span><span class="o">+</span><span class="n">plus_italy</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;South Korea&#39;</span><span class="p">][</span><span class="mi">16</span><span class="p">:</span><span class="mi">16</span><span class="o">+</span><span class="n">plus_s_korea</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Iran&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Iran&#39;</span><span class="p">][</span><span class="mi">37</span><span class="p">:</span><span class="mi">37</span><span class="o">+</span><span class="n">plus_iran</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Japan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Japan&#39;</span><span class="p">][</span><span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;France&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;France&#39;</span><span class="p">][</span><span class="mi">14</span><span class="p">:</span><span class="mi">14</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Singapore&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Singapore&#39;</span><span class="p">][</span><span class="mi">12</span><span class="p">:</span><span class="mi">12</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">aligned_data</span><span class="p">[</span><span class="s1">&#39;Germany&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Germany&#39;</span><span class="p">][</span><span class="mi">16</span><span class="p">:</span><span class="mi">16</span><span class="o">+</span><span class="n">plus_days</span><span class="p">])</span>
-<span class="n">df_aligned</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">aligned_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">]))</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df_aligned</span>
-
 <span class="c1"># plot</span>
 
 <span class="c1"># color scheme</span>
