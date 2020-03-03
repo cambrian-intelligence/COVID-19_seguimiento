@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="shortcut icon" type="image/x-icon" href="/COVID-19_seguimiento/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Predicciones (en desarrollo) | Dashboard de seguimiento del COVID-19 en España</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Predicciones (en desarrollo)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Modelos predictivos" />
+<meta property="og:description" content="Modelos predictivos" />
+<link rel="canonical" href="https://cambrian-intelligence.github.io/COVID-19_seguimiento/2020/02/29/confirmados_datos-Predicciones.html" />
+<meta property="og:url" content="https://cambrian-intelligence.github.io/COVID-19_seguimiento/2020/02/29/confirmados_datos-Predicciones.html" />
+<meta property="og:site_name" content="Dashboard de seguimiento del COVID-19 en España" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-29T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"Modelos predictivos","@type":"BlogPosting","headline":"Predicciones (en desarrollo)","dateModified":"2020-02-29T00:00:00-06:00","datePublished":"2020-02-29T00:00:00-06:00","url":"https://cambrian-intelligence.github.io/COVID-19_seguimiento/2020/02/29/confirmados_datos-Predicciones.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://cambrian-intelligence.github.io/COVID-19_seguimiento/2020/02/29/confirmados_datos-Predicciones.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/COVID-19_seguimiento/assets/main.css">
+  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://cambrian-intelligence.github.io/COVID-19_seguimiento/feed.xml" title="Dashboard de seguimiento del COVID-19 en España" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-159393270-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+
+
+  <script>
+  function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'wrapper';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+  }
+  window.onload = wrap_img;
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      // add link icon to anchor tags
+      var elem = document.querySelectorAll(".anchor-link")
+      elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+      // remove paragraph tags in rendered toc (happens from notebooks)
+      var toctags = document.querySelectorAll(".toc-entry")
+      toctags.forEach(e => (e.firstElementChild.innerText = e.firstElementChild.innerText.replace('¶', '')))
+    });
+  </script>
+</head><body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/COVID-19_seguimiento/">Dashboard de seguimiento del COVID-19 en España</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/COVID-19_seguimiento/about/">Sobre esta herramienta</a><a class="page-link" href="/COVID-19_seguimiento/">Inicio</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Predicciones (en desarrollo)</h1><p class="page-description">Modelos predictivos</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-29T00:00:00-06:00" itemprop="datePublished">
+        Feb 29, 2020
+      </time>
+       • </p>
+
+    
+
+    
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-02-29-confirmados_datos-Predicciones.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Real-(puntos)-y-predicci&#243;n-(curva)">Real (puntos) y predicci&#243;n (curva)<a class="anchor-link" href="#Real-(puntos)-y-predicci&#243;n-(curva)">&#182;</a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p><div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#collapse</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="c1"># get data</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://docs.google.com/spreadsheet/ccc?key=1FwOXbkWeuS1LHrKxhSfepGtsgQ6iIEQZmWig_JKo8z0&amp;output=csv&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;Wrong status code&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="mi">33</span><span class="p">][[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Total confirmados&#39;</span><span class="p">]]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;dias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)))</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;log(Total confirmados)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total confirmados&#39;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;log(Total confirmados)&#39;</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;dias&#39;</span><span class="p">])</span>
+<span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">preds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">pred_span</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">pred_span</span><span class="p">):</span>
+    <span class="n">log_pred</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="n">log_pred</span>
+    <span class="n">preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+    
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;modelo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pred_span</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">ii</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;Fecha&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;dias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;dias&#39;</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;modelo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+    
+<span class="n">source</span> <span class="o">=</span> <span class="n">df</span>
+<span class="n">nearest</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;single&#39;</span><span class="p">,</span> <span class="n">nearest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span>
+                        <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;modelo&#39;</span><span class="p">],</span> <span class="n">empty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+<span class="c1"># The basic line</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">interpolate</span><span class="o">=</span><span class="s1">&#39;basis&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;monthdate(Fecha):O&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;modelo:Q&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;#FF0000&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;monthdate(Fecha):O&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Total confirmados&#39;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Total confirmados&#39;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+
+<span class="c1"># Transparent selectors across the chart. This is what tells us</span>
+<span class="c1"># the x-value of the cursor</span>
+<span class="n">selectors</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;monthdate(Fecha):O&#39;</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span>
+    <span class="n">nearest</span>
+<span class="p">)</span>
+
+<span class="c1"># Draw points on the line, and highlight based on selection</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="c1"># Draw text labels near the points, and highlight based on selection</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">mark_text</span><span class="p">(</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">dy</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">text</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">nearest</span><span class="p">,</span> <span class="s1">&#39;modelo:Q&#39;</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="c1"># Draw a rule at the location of the selection</span>
+<span class="n">rules</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_rule</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;monthdate(Fecha):O&#39;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span>
+    <span class="n">nearest</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Put the five layers into a chart and bind the data</span>
+<span class="n">alt</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span>
+    <span class="n">line</span><span class="p">,</span> <span class="n">selectors</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">scatter</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
+<span class="p">)</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">padding</span><span class="o">=</span><span class="mi">20</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+</p>
+    </details>
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-b286b454f62b41dab620e221acbcc79b"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    const outputDiv = document.getElementById("altair-viz-b286b454f62b41dab620e221acbcc79b");
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.0.2?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "padding": 20}, "layer": [{"mark": {"type": "line", "interpolate": "basis"}, "encoding": {"color": {"value": "#FF0000"}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": "point", "encoding": {"opacity": {"value": 0}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}}, "selection": {"selector003": {"type": "single", "nearest": true, "on": "mouseover", "fields": ["modelo"], "empty": "none"}}}, {"mark": "point", "encoding": {"color": {"value": "#FF0000"}, "opacity": {"condition": {"value": 1, "selection": "selector003"}, "value": 0}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": {"type": "rule", "color": "gray"}, "encoding": {"x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}}, "transform": [{"filter": {"selection": "selector003"}}]}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": -5}, "encoding": {"color": {"value": "#FF0000"}, "text": {"condition": {"type": "quantitative", "field": "modelo", "selection": "selector003"}, "value": " "}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": {"type": "circle", "size": 60}, "encoding": {"tooltip": [{"type": "quantitative", "field": "Total confirmados"}], "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "Total confirmados"}}, "selection": {"selector004": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}}], "data": {"name": "data-c3f067f227a7227bc8e2ac6a720e49df"}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json", "datasets": {"data-c3f067f227a7227bc8e2ac6a720e49df": [{"Fecha": "2020-02-24T00:00:00", "Total confirmados": 3.0, "dias": 0.0, "log(Total confirmados)": 1.0986122886681098, "modelo": 6.069578149310797}, {"Fecha": "2020-02-25T00:00:00", "Total confirmados": 7.0, "dias": 1.0, "log(Total confirmados)": 1.9459101490553132, "modelo": 9.445950997716077}, {"Fecha": "2020-02-26T00:00:00", "Total confirmados": 13.0, "dias": 2.0, "log(Total confirmados)": 2.5649493574615367, "modelo": 14.700525811894352}, {"Fecha": "2020-02-27T00:00:00", "Total confirmados": 28.0, "dias": 3.0, "log(Total confirmados)": 3.332204510175204, "modelo": 22.878105041877088}, {"Fecha": "2020-02-28T00:00:00", "Total confirmados": 40.0, "dias": 4.0, "log(Total confirmados)": 3.6888794541139363, "modelo": 35.6046917644039}, {"Fecha": "2020-02-29T00:00:00", "Total confirmados": 62.0, "dias": 5.0, "log(Total confirmados)": 4.127134385045092, "modelo": 55.410798810380875}, {"Fecha": "2020-03-01T00:00:00", "Total confirmados": 83.0, "dias": 6.0, "log(Total confirmados)": 4.418840607796598, "modelo": 86.23460765005468}, {"Fecha": "2020-03-02T00:00:00", "Total confirmados": 122.0, "dias": 7.0, "log(Total confirmados)": 4.804021044733257, "modelo": 134.20502350104564}, {"Fecha": "2020-03-03T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 208.86032677281827}, {"Fecha": "2020-03-04T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 325.04473351035614}, {"Fecha": "2020-03-05T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 505.85997070540157}, {"Fecha": "2020-03-06T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 787.2587480452643}, {"Fecha": "2020-03-07T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 1225.1934769804852}, {"Fecha": "2020-03-08T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 1906.7416650023968}, {"Fecha": "2020-03-09T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 2967.420122098825}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+  </div><a class="u-url" href="/COVID-19_seguimiento/2020/02/29/confirmados_datos-Predicciones.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/COVID-19_seguimiento/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Dashboard de seguimiento del COVID-19 en España</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Dashboard de seguimiento del COVID-19 en España</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list">
+  <li>Creado por <a href="https://cambrianintelligence.com">Cambrian Intelligence SL</a></li><li><a href="https://www.linkedin.com/company/cambrian-intelligence"><svg class="social svg-icon"><use xlink:href="/COVID-19_seguimiento/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">Cambrian Intelligence SL</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Dashboard seguimiento COVID-19</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
