@@ -143,14 +143,14 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">],</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">25</span><span class="p">:</span><span class="mi">33</span><span class="p">][[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Total confirmados&#39;</span><span class="p">]]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">34</span><span class="p">][[</span><span class="s1">&#39;Fecha&#39;</span><span class="p">,</span><span class="s1">&#39;Total confirmados&#39;</span><span class="p">]]</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)))</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;log(Total confirmados)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Total confirmados&#39;</span><span class="p">])</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;log(Total confirmados)&#39;</span><span class="p">])</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;dias&#39;</span><span class="p">])</span>
-<span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 
 <span class="n">preds</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">pred_span</span> <span class="o">=</span> <span class="mi">7</span>
@@ -234,10 +234,10 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-b286b454f62b41dab620e221acbcc79b"></div>
+<div id="altair-viz-6434923f5e214e8ea703879607812691"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-b286b454f62b41dab620e221acbcc79b");
+    const outputDiv = document.getElementById("altair-viz-6434923f5e214e8ea703879607812691");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -278,7 +278,7 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "padding": 20}, "layer": [{"mark": {"type": "line", "interpolate": "basis"}, "encoding": {"color": {"value": "#FF0000"}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": "point", "encoding": {"opacity": {"value": 0}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}}, "selection": {"selector003": {"type": "single", "nearest": true, "on": "mouseover", "fields": ["modelo"], "empty": "none"}}}, {"mark": "point", "encoding": {"color": {"value": "#FF0000"}, "opacity": {"condition": {"value": 1, "selection": "selector003"}, "value": 0}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": {"type": "rule", "color": "gray"}, "encoding": {"x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}}, "transform": [{"filter": {"selection": "selector003"}}]}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": -5}, "encoding": {"color": {"value": "#FF0000"}, "text": {"condition": {"type": "quantitative", "field": "modelo", "selection": "selector003"}, "value": " "}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": {"type": "circle", "size": 60}, "encoding": {"tooltip": [{"type": "quantitative", "field": "Total confirmados"}], "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "Total confirmados"}}, "selection": {"selector004": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}}], "data": {"name": "data-c3f067f227a7227bc8e2ac6a720e49df"}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json", "datasets": {"data-c3f067f227a7227bc8e2ac6a720e49df": [{"Fecha": "2020-02-24T00:00:00", "Total confirmados": 3.0, "dias": 0.0, "log(Total confirmados)": 1.0986122886681098, "modelo": 6.069578149310797}, {"Fecha": "2020-02-25T00:00:00", "Total confirmados": 7.0, "dias": 1.0, "log(Total confirmados)": 1.9459101490553132, "modelo": 9.445950997716077}, {"Fecha": "2020-02-26T00:00:00", "Total confirmados": 13.0, "dias": 2.0, "log(Total confirmados)": 2.5649493574615367, "modelo": 14.700525811894352}, {"Fecha": "2020-02-27T00:00:00", "Total confirmados": 28.0, "dias": 3.0, "log(Total confirmados)": 3.332204510175204, "modelo": 22.878105041877088}, {"Fecha": "2020-02-28T00:00:00", "Total confirmados": 40.0, "dias": 4.0, "log(Total confirmados)": 3.6888794541139363, "modelo": 35.6046917644039}, {"Fecha": "2020-02-29T00:00:00", "Total confirmados": 62.0, "dias": 5.0, "log(Total confirmados)": 4.127134385045092, "modelo": 55.410798810380875}, {"Fecha": "2020-03-01T00:00:00", "Total confirmados": 83.0, "dias": 6.0, "log(Total confirmados)": 4.418840607796598, "modelo": 86.23460765005468}, {"Fecha": "2020-03-02T00:00:00", "Total confirmados": 122.0, "dias": 7.0, "log(Total confirmados)": 4.804021044733257, "modelo": 134.20502350104564}, {"Fecha": "2020-03-03T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 208.86032677281827}, {"Fecha": "2020-03-04T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 325.04473351035614}, {"Fecha": "2020-03-05T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 505.85997070540157}, {"Fecha": "2020-03-06T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 787.2587480452643}, {"Fecha": "2020-03-07T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 1225.1934769804852}, {"Fecha": "2020-03-08T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 1906.7416650023968}, {"Fecha": "2020-03-09T00:00:00", "Total confirmados": null, "dias": 7.0, "log(Total confirmados)": null, "modelo": 2967.420122098825}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "padding": 20}, "layer": [{"mark": {"type": "line", "interpolate": "basis"}, "encoding": {"color": {"value": "#FF0000"}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": "point", "encoding": {"opacity": {"value": 0}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}}, "selection": {"selector003": {"type": "single", "nearest": true, "on": "mouseover", "fields": ["modelo"], "empty": "none"}}}, {"mark": "point", "encoding": {"color": {"value": "#FF0000"}, "opacity": {"condition": {"value": 1, "selection": "selector003"}, "value": 0}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": {"type": "rule", "color": "gray"}, "encoding": {"x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}}, "transform": [{"filter": {"selection": "selector003"}}]}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": -5}, "encoding": {"color": {"value": "#FF0000"}, "text": {"condition": {"type": "quantitative", "field": "modelo", "selection": "selector003"}, "value": " "}, "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "modelo"}}}, {"mark": {"type": "circle", "size": 60}, "encoding": {"tooltip": [{"type": "quantitative", "field": "Total confirmados"}], "x": {"type": "ordinal", "field": "Fecha", "timeUnit": "monthdate"}, "y": {"type": "quantitative", "field": "Total confirmados"}}, "selection": {"selector004": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}}], "data": {"name": "data-dde6ea23c11b9d7570a46df039b97fc3"}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json", "datasets": {"data-dde6ea23c11b9d7570a46df039b97fc3": [{"Fecha": "2020-02-29T00:00:00", "Total confirmados": 62.0, "dias": 0.0, "log(Total confirmados)": 4.127134385045092, "modelo": 61.290367921147464}, {"Fecha": "2020-03-01T00:00:00", "Total confirmados": 83.0, "dias": 1.0, "log(Total confirmados)": 4.418840607796598, "modelo": 85.44851596524138}, {"Fecha": "2020-03-02T00:00:00", "Total confirmados": 122.0, "dias": 2.0, "log(Total confirmados)": 4.804021044733257, "modelo": 119.12881466229288}, {"Fecha": "2020-03-03T00:00:00", "Total confirmados": 165.0, "dias": 3.0, "log(Total confirmados)": 5.10594547390058, "modelo": 166.0845050675401}, {"Fecha": "2020-03-04T00:00:00", "Total confirmados": null, "dias": 3.0, "log(Total confirmados)": null, "modelo": 231.54820184961326}, {"Fecha": "2020-03-05T00:00:00", "Total confirmados": null, "dias": 3.0, "log(Total confirmados)": null, "modelo": 322.815001664281}, {"Fecha": "2020-03-06T00:00:00", "Total confirmados": null, "dias": 3.0, "log(Total confirmados)": null, "modelo": 450.05542892184536}, {"Fecha": "2020-03-07T00:00:00", "Total confirmados": null, "dias": 3.0, "log(Total confirmados)": null, "modelo": 627.4488114176085}, {"Fecha": "2020-03-08T00:00:00", "Total confirmados": null, "dias": 3.0, "log(Total confirmados)": null, "modelo": 874.763386128903}, {"Fecha": "2020-03-09T00:00:00", "Total confirmados": null, "dias": 3.0, "log(Total confirmados)": null, "modelo": 1219.559217879219}, {"Fecha": "2020-03-10T00:00:00", "Total confirmados": null, "dias": 3.0, "log(Total confirmados)": null, "modelo": 1700.2594181451086}]}}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -341,93 +341,69 @@ if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNo
   <tbody>
     <tr>
       <th>0</th>
-      <td>2020-02-24</td>
-      <td>3.0</td>
-      <td>6.069578</td>
+      <td>2020-02-29</td>
+      <td>62.0</td>
+      <td>61.290368</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2020-02-25</td>
-      <td>7.0</td>
-      <td>9.445951</td>
+      <td>2020-03-01</td>
+      <td>83.0</td>
+      <td>85.448516</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2020-02-26</td>
-      <td>13.0</td>
-      <td>14.700526</td>
+      <td>2020-03-02</td>
+      <td>122.0</td>
+      <td>119.128815</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2020-02-27</td>
-      <td>28.0</td>
-      <td>22.878105</td>
+      <td>2020-03-03</td>
+      <td>165.0</td>
+      <td>166.084505</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2020-02-28</td>
-      <td>40.0</td>
-      <td>35.604692</td>
+      <td>2020-03-04</td>
+      <td>NaN</td>
+      <td>231.548202</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>2020-02-29</td>
-      <td>62.0</td>
-      <td>55.410799</td>
+      <td>2020-03-05</td>
+      <td>NaN</td>
+      <td>322.815002</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>2020-03-01</td>
-      <td>83.0</td>
-      <td>86.234608</td>
+      <td>2020-03-06</td>
+      <td>NaN</td>
+      <td>450.055429</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>2020-03-02</td>
-      <td>122.0</td>
-      <td>134.205024</td>
+      <td>2020-03-07</td>
+      <td>NaN</td>
+      <td>627.448811</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>2020-03-03</td>
+      <td>2020-03-08</td>
       <td>NaN</td>
-      <td>208.860327</td>
+      <td>874.763386</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>2020-03-04</td>
+      <td>2020-03-09</td>
       <td>NaN</td>
-      <td>325.044734</td>
+      <td>1219.559218</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>2020-03-05</td>
+      <td>2020-03-10</td>
       <td>NaN</td>
-      <td>505.859971</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2020-03-06</td>
-      <td>NaN</td>
-      <td>787.258748</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2020-03-07</td>
-      <td>NaN</td>
-      <td>1225.193477</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2020-03-08</td>
-      <td>NaN</td>
-      <td>1906.741665</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2020-03-09</td>
-      <td>NaN</td>
-      <td>2967.420122</td>
+      <td>1700.259418</td>
     </tr>
   </tbody>
 </table>
