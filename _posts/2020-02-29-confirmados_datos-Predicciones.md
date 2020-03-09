@@ -33,6 +33,13 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>El progreso real parece por ahora subexponencial.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Real-(puntos)-y-predicci&#243;n-(curva)">Real (puntos) y predicci&#243;n (curva)<a class="anchor-link" href="#Real-(puntos)-y-predicci&#243;n-(curva)">&#182;</a></h3>
 </div>
 </div>
